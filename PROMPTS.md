@@ -277,11 +277,44 @@ Pero **recomendación**: Siempre usa `in` o `not in`. Es más legible y es lo qu
 
 **Prompt usado**:
 
->
+> Generá ejemplos de textos y contá la frecuencia de palabras ignorando mayúsculas.
+> Mostrá el texto y el diccionario resultante.
+> Luego extraé una regla general.
+
+Generá ejemplos de textos y contá la frecuencia de palabras ignorando mayúsculas.
+Mostrá el texto y el diccionario resultante.
+Luego extraé una regla general.
+
+Ejemplos:
+
+"hola mundo hola" → {"hola": 2, "mundo": 1}  
+"Python python PYTHON" → {"python": 3}
+
+Regla general:
+
+- Convertir a minúsculas
+- Separar palabras
+- Recorrerlas
+- Contarlas en un diccionario
 
 **Resultado obtenido**:
+def contar_palabras(texto: str) -> dict:
+"""
+Retorna un diccionario con la frecuencia de cada palabra.
+"""
+resultado = {}
+palabras = texto.lower().split()
+
+    for palabra in palabras:
+        if palabra in resultado:
+            resultado[palabra] += 1
+        else:
+            resultado[palabra] = 1
+
+    return resultado
 
 **¿Lo usaste tal cual o lo modificaste?**
+Lo use tal cual
 
 ---
 
