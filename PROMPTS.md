@@ -34,18 +34,14 @@ Explicá qué cambios hiciste y por qué (o por qué no cambiaste nada).
 **Herramienta**:
 Copilot
 **Prompt usado**:
-P1: ¿Cómo puedo saber el tipo de un dato en Python?
-
-P2: ¿Qué devuelve la función type()?
-
-P3: ¿Cómo convierto ese tipo a string para retornarlo?
-
-P4: Mostrame una implementación de tipo_de_dato(valor) -> str que devuelva el tipo como texto.
+P1: Como puedo crear un saludo personalizado en Python
+P2: Como concateno string en Python?
+P3: Mostrame una implementacion de una funcion crear*saludo(nombre: str) -> str que devuelva el string "Hola, \_nombre*!"
 
 **Resultado obtenido**:
-def tipo_de_dato(valor) -> str:
+def crear_saludo(nombre: str) -> str:
 
-    return type(valor).__name__
+    return f"Hola, {nombre}!"
 
 **¿Lo usaste tal cual o lo modificaste?**
 Modifique el string del mensaje de error
@@ -176,19 +172,23 @@ use tal cual
 **Herramienta**:
 Copilot
 **Prompt usado**:
-P1: ¿Cómo aplico una función a cada elemento de una lista en Python?
-
-P2: ¿Cuál es la forma más simple de hacerlo para un TP?
-
-P3: ¿Conviene usar for, comprensión de listas o map() en este caso?
-
-P4: Mostrame una implementación de aplicar_funcion(lista: list, func) -> list usando un enfoque simple y claro.
+P1: ¿Para que sirve la funcion functools.reduce?
+P2: ¿Como puedo aplicar una funcion acumulativamente a una lista?
+P3: Para que me sirve la variable inicial en una funcion de reduccion de listas?
+P4: Mostrame una implementacion del metodo def reducir(lista: list, func, inicial): , que aplica func acumulativamente a los elementos de lista,
+comenzando con inicial.
+Ejemplo: reducir([1,2,3], lambda a,b: a+b, 0) -> 6
+SIN USAR functools.reduce
 
 **Resultado obtenido**:
-nuevaLista: list = []
-for el in lista:
-nuevaLista.append(func(el))  
- return nuevaLista
+def reducir(lista: list, func, inicial):
+
+    acumulador = inicial
+    for elemento in lista:
+        acumulador = func(acumulador, elemento)
+    return acumulador
+    pass
+
 **¿Lo usaste tal cual o lo modificaste?**
 La usé tal cual
 
@@ -202,16 +202,24 @@ Chat GPT
 
 >
 
-1. Convertir el texto a minúsculas
-2. Eliminar los espacios
-3. Invertir el texto
-4. Comparar el texto original con el invertido
+P1: ¿Que es el cifrado Cesar?
+P2:¿Cual es la manera en la que el cifrado Cesar funciona?
+P3:Hay un limite en el valor de despalzamiento pasado por parametro en una funcion que cifre en Cesar?
+P4: Mostrame una implementacion del cifrado cesar en Python def caesar_cipher(texto: str, desplazamiento: int) -> str: que solo desplace caracteres (a-z, A-Z), los demás caracteres no cambian. no utilices ninguna libreria externa
 
-Resultado esperado:
+**Resultado obtenido**:
+def caesar_cipher(texto: str, desplazamiento: int) -> str:
 
-"Anita lava la tina" → True
-"Hola mundo" → False
-Resultado obtenido:
+    resultado = ""
+    for char in texto:
+        if char.isalpha():
+            base = ord('a') if char.islower() else ord('A')
+            nueva = (ord(char) - base + desplazamiento) % 26
+            resultado += chr(base + nueva)
+        else:
+            resultado += char
+
+    return resultado
 
 **¿Lo usaste tal cual o lo modificaste?**
 Lo use tal cual

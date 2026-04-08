@@ -11,7 +11,7 @@ def crear_saludo(nombre: str) -> str:
     Retorna un saludo personalizado.
     Ejemplo: crear_saludo("Ana") -> "Hola, Ana!"
     """
-    return '"Hola, "' + str + '"!"'
+    return f"Hola, {nombre}!"
     pass
 
 

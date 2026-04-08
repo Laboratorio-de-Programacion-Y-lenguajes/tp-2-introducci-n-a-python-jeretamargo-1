@@ -59,4 +59,6 @@ def caesar_cipher(texto: str, desplazamiento: int) -> str:
             resultado += chr(base + nueva)
         else:
             resultado += char
-    pass
+
+    return resultado
+pass

@@ -51,5 +51,8 @@ def reducir(lista: list, func, inicial):
     Ejemplo: reducir([1,2,3], lambda a,b: a+b, 0) -> 6
     NO uses functools.reduce
     """
-    # TU CÓDIGO AQUÍ
+    acumulador = inicial
+    for elemento in lista:
+        acumulador = func(acumulador, elemento)
+    return acumulador
     pass
