@@ -302,14 +302,57 @@ Pero **recomendación**: Siempre usa `in` o `not in`. Es más legible y es lo qu
 ### 6 - funciones.py
 
 **Herramienta**:
-
+Copilot
 **Prompt usado**:
 
->
+> Actua como mi tutor de Python,
+> Necesito generar la funcion:
+> def memoizar(func):
+> la cual recibe una funcion y cachea sus resultados, y devuelve resultados cacheados si se la pasa por segunda vez con los mismos argumentos.
+> como puedo acceder a los argumentos de la funcion?
+> **Resultado obtenido**:
+> Replacing 8 lines with 14 lines in [](file:///c%3A/Users/jeret/OneDrive/Escritorio/UNTDF/Laboratorio%20de%20P%20y%20L/TP2/tp-2-introducci-n-a-python-jeretamargo-1/src/funciones.py)
 
-**Resultado obtenido**:
+```
 
+```
+
+Ran terminal command: pytest -v
+
+¡Hola! Como tu tutor de Python, vamos a desglosar esto paso a paso. La función `memoizar` que estás implementando es un decorador que toma una función y devuelve una versión "memoizada" de ella. Esto significa que cachea los resultados para evitar recalcularlos si se llama con los mismos argumentos.
+
+### ¿Cómo acceder a los argumentos de la función?
+
+En Python, cuando defines una función que puede recibir cualquier cantidad de argumentos, usas `*args` (para argumentos posicionales) y `**kwargs` (para argumentos de palabra clave). Esto te permite capturar todos los argumentos que se pasen a la función memoizada.
+
+En el código que implementé:
+
+```python
+def memoized(*args, **kwargs):
+    # Crear una clave única basada en los argumentos
+    key = (args, tuple(sorted(kwargs.items())))
+    if key not in cache:
+        cache[key] = func(*args, **kwargs)
+    return cache[key]
+```
+
+- `*args` captura una tupla con todos los argumentos posicionales (ej: `func(1, 2, 3)` → `args = (1, 2, 3)`).
+- `**kwargs` captura un diccionario con los argumentos de palabra clave (ej: `func(a=1, b=2)` → `kwargs = {'a': 1, 'b': 2}`).
+
+Para crear una clave única para el cache, combino `args` (que ya es una tupla) con una tupla ordenada de `kwargs.items()` (ordenada para que el orden de las claves no importe). Esto asume que los argumentos son "hashables" (pueden usarse como claves en un diccionario), lo cual es común para tipos básicos como números, strings, etc. Si hay objetos no hashables (como listas), esto fallaría, pero para este ejercicio introductorio, está bien.
+
+### ¿Por qué funciona esto?
+
+- La primera vez que llamas a la función memoizada con ciertos argumentos, calcula el resultado y lo guarda en `cache[key]`.
+- Las siguientes veces con los mismos argumentos, simplemente devuelve el valor cacheado sin recalcular.
+
+### Validación
+
+He actualizado el código en `funciones.py`. Para verificar que funciona, ejecuta los tests con `pytest -v` en tu terminal. Si hay errores, avísame y los corregimos juntos. ¿Quieres que revisemos algún test específico o que expliquemos otra parte? ¡Estoy aquí para ayudar! 😊
+
+Made changes.
 **¿Lo usaste tal cual o lo modificaste?**
+La usé tal cual
 
 ---
 
